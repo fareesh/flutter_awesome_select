@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:collection/collection.dart' show IterableExtension;
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'model/builder.dart';
 import 'model/modal_theme.dart';
 import 'model/modal_config.dart';
@@ -973,8 +974,8 @@ abstract class S2State<T> extends State<SmartSelect<T>> {
         backgroundColor:
             widget.modalConfig.isFullPage != true ? theme.cardColor : null,
         textStyle: widget.modalConfig.isFullPage != true
-            ? theme.textTheme.headline6
-            : theme.primaryTextTheme.headline6,
+            ? theme.textTheme.titleLarge
+            : theme.primaryTextTheme.titleLarge,
         iconTheme:
             widget.modalConfig.isFullPage != true ? theme.iconTheme : null,
         errorStyle: TextStyle(
@@ -983,8 +984,8 @@ abstract class S2State<T> extends State<SmartSelect<T>> {
           color: widget.modalConfig.isFullPage == true
               ? (theme.primaryColorBrightness == Brightness.dark
                   ? Colors.white
-                  : theme.errorColor)
-              : theme.errorColor,
+                  : theme.colorScheme.error)
+              : theme.colorScheme.error,
         ),
       ).merge(widget.modalConfig.headerStyle),
     );
@@ -1246,12 +1247,14 @@ abstract class S2State<T> extends State<SmartSelect<T>> {
       primary: true,
       shape: modalHeaderStyle.shape,
       elevation: modalHeaderStyle.elevation,
-      brightness: modalHeaderStyle.brightness,
       backgroundColor: modalHeaderStyle.backgroundColor,
       actionsIconTheme: modalHeaderStyle.actionsIconTheme,
       iconTheme: modalHeaderStyle.iconTheme,
       centerTitle: modalHeaderStyle.centerTitle,
       automaticallyImplyLeading: modalConfig.isFullPage || isFiltering,
+      systemOverlayStyle: modalHeaderStyle.brightness == Brightness.dark
+          ? SystemUiOverlayStyle.light
+          : SystemUiOverlayStyle.dark,
       leading: isFiltering ? const Icon(Icons.search) : null,
       title: isFiltering
           ? modalFilter
@@ -1548,7 +1551,7 @@ abstract class S2State<T> extends State<SmartSelect<T>> {
           isScrollControlled: true,
           builder: (_) {
             final MediaQueryData mediaQuery =
-                MediaQueryData.fromWindow(WidgetsBinding.instance!.window);
+                MediaQueryData.fromView(WidgetsBinding.instance.window);
             final double topObstructions = mediaQuery.viewPadding.top;
             final double bottomObstructions = mediaQuery.viewPadding.bottom;
             final double keyboardHeight = mediaQuery.viewInsets.bottom;

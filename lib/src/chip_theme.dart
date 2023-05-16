@@ -62,7 +62,7 @@ class S2ChipTheme extends StatelessWidget {
         (!isDark
             ? Theme.of(context).unselectedWidgetColor
             : ChipTheme.of(context).backgroundColor ??
-                Theme.of(context).backgroundColor);
+                Theme.of(context).colorScheme.background);
     final Color backgroundColor = raised == true
         ? primaryColor
         : outlined == true
