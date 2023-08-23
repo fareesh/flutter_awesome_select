@@ -1,5 +1,6 @@
 import 'package:collection/collection.dart' show IterableExtension;
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'model/builder.dart';
 import 'model/modal_theme.dart';
 import 'model/modal_config.dart';
@@ -1246,12 +1247,14 @@ abstract class S2State<T> extends State<SmartSelect<T>> {
       primary: true,
       shape: modalHeaderStyle.shape,
       elevation: modalHeaderStyle.elevation,
-      systemOverlayStyle: modalHeaderStyle.brightness,
       backgroundColor: modalHeaderStyle.backgroundColor,
       actionsIconTheme: modalHeaderStyle.actionsIconTheme,
       iconTheme: modalHeaderStyle.iconTheme,
       centerTitle: modalHeaderStyle.centerTitle,
       automaticallyImplyLeading: modalConfig.isFullPage || isFiltering,
+      systemOverlayStyle: modalHeaderStyle.brightness == Brightness.dark
+          ? SystemUiOverlayStyle.light
+          : SystemUiOverlayStyle.dark,
       leading: isFiltering ? const Icon(Icons.search) : null,
       title: isFiltering
           ? modalFilter

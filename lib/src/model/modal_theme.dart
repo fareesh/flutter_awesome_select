@@ -71,7 +71,7 @@ class S2ModalHeaderStyle with Diagnosticable {
   final Color? backgroundColor;
 
   /// Header brightness
-  final SystemUiOverlayStyle? brightness;
+  final Brightness? brightness;
 
   /// Whether the header title is centered
   final bool centerTitle;
@@ -112,7 +112,7 @@ class S2ModalHeaderStyle with Diagnosticable {
     ShapeBorder? shape,
     double? elevation,
     Color? backgroundColor,
-    SystemUiOverlayStyle? brightness,
+    Brightness? brightness,
     bool? useLeading,
     bool? centerTitle,
     TextStyle? textStyle,
