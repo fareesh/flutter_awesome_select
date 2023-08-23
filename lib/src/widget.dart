@@ -1,4 +1,3 @@
-import 'dart:ui';
 import 'package:collection/collection.dart' show IterableExtension;
 import 'package:flutter/material.dart';
 import 'model/builder.dart';
@@ -973,18 +972,19 @@ abstract class S2State<T> extends State<SmartSelect<T>> {
         backgroundColor:
             widget.modalConfig.isFullPage != true ? theme.cardColor : null,
         textStyle: widget.modalConfig.isFullPage != true
-            ? theme.textTheme.headline6
-            : theme.primaryTextTheme.headline6,
+            ? theme.textTheme.titleLarge
+            : theme.primaryTextTheme.titleLarge,
         iconTheme:
             widget.modalConfig.isFullPage != true ? theme.iconTheme : null,
         errorStyle: TextStyle(
           fontSize: 13.5,
           fontWeight: FontWeight.w500,
           color: widget.modalConfig.isFullPage == true
-              ? (theme.primaryColorBrightness == Brightness.dark
+              ? (ThemeData.estimateBrightnessForColor(theme.primaryColor) ==
+                      Brightness.dark
                   ? Colors.white
-                  : theme.errorColor)
-              : theme.errorColor,
+                  : theme.colorScheme.error)
+              : theme.colorScheme.error,
         ),
       ).merge(widget.modalConfig.headerStyle),
     );
@@ -1246,7 +1246,7 @@ abstract class S2State<T> extends State<SmartSelect<T>> {
       primary: true,
       shape: modalHeaderStyle.shape,
       elevation: modalHeaderStyle.elevation,
-      brightness: modalHeaderStyle.brightness,
+      systemOverlayStyle: modalHeaderStyle.brightness,
       backgroundColor: modalHeaderStyle.backgroundColor,
       actionsIconTheme: modalHeaderStyle.actionsIconTheme,
       iconTheme: modalHeaderStyle.iconTheme,
@@ -1548,7 +1548,7 @@ abstract class S2State<T> extends State<SmartSelect<T>> {
           isScrollControlled: true,
           builder: (_) {
             final MediaQueryData mediaQuery =
-                MediaQueryData.fromWindow(WidgetsBinding.instance!.window);
+                MediaQueryData.fromView(View.of(context));
             final double topObstructions = mediaQuery.viewPadding.top;
             final double bottomObstructions = mediaQuery.viewPadding.bottom;
             final double keyboardHeight = mediaQuery.viewInsets.bottom;

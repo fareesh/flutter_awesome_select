@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'dart:ui';
 
 /// Configure modal style
 @immutable
@@ -71,7 +71,7 @@ class S2ModalHeaderStyle with Diagnosticable {
   final Color? backgroundColor;
 
   /// Header brightness
-  final Brightness? brightness;
+  final SystemUiOverlayStyle? brightness;
 
   /// Whether the header title is centered
   final bool centerTitle;
@@ -112,7 +112,7 @@ class S2ModalHeaderStyle with Diagnosticable {
     ShapeBorder? shape,
     double? elevation,
     Color? backgroundColor,
-    Brightness? brightness,
+    SystemUiOverlayStyle? brightness,
     bool? useLeading,
     bool? centerTitle,
     TextStyle? textStyle,

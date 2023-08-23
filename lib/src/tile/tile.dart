@@ -215,7 +215,7 @@ class S2Tile<T> extends StatelessWidget {
         return DefaultTextStyle.merge(
           child: isLoading == true ? _loadingWidget : value,
           style: isError == true
-              ? TextStyle(color: Theme.of(context).errorColor)
+              ? TextStyle(color: Theme.of(context).colorScheme.error)
               : null,
           overflow: TextOverflow.ellipsis,
           maxLines: 1,
